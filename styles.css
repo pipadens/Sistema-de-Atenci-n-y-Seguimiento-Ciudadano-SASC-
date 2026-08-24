@@ -1,0 +1,194 @@
+/* === ESTILOS GENERALES === */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f8fafc;
+    font-family: sans-serif;
+}
+
+/* === SISTEMA DE VISTAS === */
+.vista {
+    display: none;
+}
+
+.vista.activa {
+    display: block;
+}
+
+/* === CABECERA === */
+.cabecera {
+    background-color: #1b4d3e;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-logo {
+    width: 55px;
+    height: 55px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.imagen-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* TU LOGO SE VE TAL CUAL — SIN MODIFICAR NADA */
+}
+
+.texto-cabecera {
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-principal {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.subtitulo {
+    color: #c29b38;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* === CONTENIDO PRINCIPAL === */
+.contenido-principal {
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+}
+
+.tarjeta {
+    background-color: #ffffff;
+    padding: 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+.titulo-seccion {
+    margin: 0 0 0.5rem 0;
+    color: #111111;
+    font-size: 1.1rem;
+}
+
+.texto-descripcion {
+    color: #555555;
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+}
+
+.texto-vacio {
+    color: #777777;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.boton-principal {
+    background-color: #1b4d3e;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.titulo-formulario {
+    margin: 0 0 1rem 0;
+    color: #111111;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.etiqueta {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333333;
+    font-size: 1rem;
+}
+
+.campo-texto {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.area-texto {
+    height: 120px;
+    resize: vertical;
+}
+
+.boton-enviar {
+    background-color: #1b4d3e;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* === BARRA DE NAVEGACIÓN INFERIOR === */
+.navegacion-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #dddddd;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+.enlace-navegacion {
+    text-decoration: none;
+    color: #666666;
+    text-align: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.enlace-navegacion.activo {
+    color: #1b4d3e;
+    font-weight: bold;
+}
+
+.icono-navegacion {
+    font-size: 1.2rem;
+}
