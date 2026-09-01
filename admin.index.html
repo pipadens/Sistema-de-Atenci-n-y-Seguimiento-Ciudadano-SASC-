@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración Estatal - SASC Morelos</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+<!-- CABECERA INSTITUCIONAL CON EL ESCUDO REAL -->
+    <header class="cabecera-admin">
+        <div class="logo-container">
+            <img src="escudo.png" alt="Escudo Nacional" class="escudo-img">
+            <div>
+                <h2>Panel de Control Estatal - SASC Morelos</h2>
+                <p>Sistema de Atención y Seguimiento Ciudadano | Gobierno del Estado de Morelos</p>
+            </div>
+        </div>
+        <a href="index.html" class="btn-volver">← Ir al portal ciudadano</a>
+    </header>
+   
+    <main class="contenido-admin">
+        
+        <!-- TARJETAS KPI -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3 id="totalReportes">0</h3>
+                <p>Total de Reportes</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="revisionCount">0</h3>
+                <p>En Revisión / Proceso</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="resueltoCount">0</h3>
+                <Resueltos</p>
+            </div>
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="contenedor-acciones">
+            <button id="btn-limpiar" class="btn-limpiar">🗑️ Borrar Datos del Sistema</button>
+        </div>
+
+        <!-- TABLA INSTITUCIONAL -->
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Folio Oficial</th>
+                        <th>Categoría</th>
+                        <th>Título</th>
+                        <th>Ubicación</th>
+                        <th>Fecha</th>
+                        <th>Estatus Actual</th>
+                        <th>Cambiar Estatus</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaCuerpo">
+                    <!-- Dinámico desde admin.js -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- ARCHIVOS JS Y SERVICE WORKER -->
+    <script src="admin.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('admin.sw.js')
+                .then(() => console.log('Service Worker de Admin registrado con éxito'))
+                .catch(err => console.log('Error al registrar Service Worker', err));
+        }
+    </script>
+</body>
+</html>
