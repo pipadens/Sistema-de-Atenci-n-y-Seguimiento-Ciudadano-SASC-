@@ -1,0 +1,192 @@
+:root {
+    --color-primario: #1b4d3e;
+    --color-secundario: #2c7a5b;
+    --color-fondo: #f4f7f6;
+    --color-texto: #2d3748;
+    --color-blanco: #ffffff;
+    --color-borde: #cbd5e0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+    padding: 20px;
+}
+
+/* CABECERA CON FORZADO DE ESTILOS INSTITUCIONALES */
+.cabecera-admin {
+    background-color: #1b4d3e !important;
+    color: #ffffff !important;
+    padding: 20px 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.escudomor-placeholder {
+    font-size: 2.2rem;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.cabecera-admin h2 { 
+    margin: 0; 
+    font-size: 1.35rem; 
+    color: #ffffff !important;
+}
+
+.cabecera-admin p { 
+    margin: 4px 0 0 0; 
+    font-size: 0.85rem; 
+    color: #e2e8f0 !important;
+}
+
+.btn-volver {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    text-decoration: none;
+    padding: 9px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-volver:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.contenido-admin {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 180px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    text-align: center;
+    border-top: 5px solid var(--color-primario);
+}
+
+.stat-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 2rem;
+    color: var(--color-primario);
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 600;
+}
+
+.contenedor-acciones {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.btn-limpiar {
+    background: #e53e3e;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+th {
+    background: var(--color-primario);
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover { background-color: #f8faf9; }
+
+.selector-estatus {
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid var(--color-borde);
+    font-weight: 600;
+    font-family: inherit;
+    background: white;
+    cursor: pointer;
+}
+
+.escudo-img {
+    width: 45px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* Forzar tamaño estricto para el escudo de Morelos */
+.escudomor-imagen {
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* Forzar tamaño estricto para el logotipo institucional */
+.imagen-logo {
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    object-fit: contain;
+    border-radius: 50%;
+    background: #fff;
+    display: block;
+}

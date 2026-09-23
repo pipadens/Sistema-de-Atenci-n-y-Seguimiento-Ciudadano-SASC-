@@ -1,0 +1,9 @@
+{
+    "name": "Panel de Control Estatal SASC Morelos",
+    "short_name": "SASC Admin Estatal",
+    "start_url": "admin.html",
+    "display": "standalone",
+    "background_color": "#f4f7f6",
+    "theme_color": "#1b4d3e",
+    "icons": []
+}
