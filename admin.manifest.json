@@ -1,7 +1,7 @@
 {
   "name": "SASC Morelos - Sistema de Atención y Seguimiento Ciudadano",
   "short_name": "SASC Morelos",
-  "start_url": "admin.index.html",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#006847",
   "theme_color": "#006847",
