@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONTROL DE ACCESO MULTIUSUARIO PARA EL AYUNTAMIENTO
     // ----------------------------------------------------
     const cuentasAdmin = [
-        { usuario: "temixco_obras", pass: "Obras2026*", area: "Obras Públicas" },
-        { usuario: "temixco_servicios", pass: "Servicios99#", area: "Servicios Públicos" },
-        { usuario: "admin_general", pass: "SascTemixco2026", area: "Administración General" }
+        { usuario: "SASC_obras", pass: "Obras2026*", area: "Obras Públicas" },
+        { usuario: "SASC_servicios", pass: "Servicios99#", area: "Servicios Públicos" },
+        { usuario: "admin_general", pass: "SASC2026", area: "Administración General" }
     ];
 
     if (enlaceAdmin) {
