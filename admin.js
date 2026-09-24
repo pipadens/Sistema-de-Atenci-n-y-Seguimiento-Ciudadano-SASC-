@@ -62,16 +62,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnNuevoReporte) btnNuevoReporte.addEventListener('click', () => mostrarVista('reporte'));
     if (btnIrChat) btnIrChat.addEventListener('click', () => mostrarVista('chat'));
     
+   // ----------------------------------------------------
+    // CONTROL DE ACCESO MULTIUSUARIO PARA EL AYUNTAMIENTO
+    // ----------------------------------------------------
+    const cuentasAdmin = [
+        { usuario: "temixco_obras", pass: "Obras2026*", area: "Obras Públicas" },
+        { usuario: "temixco_servicios", pass: "Servicios99#", area: "Servicios Públicos" },
+        { usuario: "admin_general", pass: "SascTemixco2026", area: "Administración General" }
+    ];
+
     if (enlaceAdmin) {
         enlaceAdmin.addEventListener('click', (e) => {
             e.preventDefault();
-            const password = prompt("🔐 Ingrese la contraseña de administración:");
-            if (password === "1234") { 
+            const inputUsuario = prompt("👤 Ingrese su usuario del ayuntamiento:");
+            if (inputUsuario === null) return; // Si cancela, no hace nada
+
+            const inputPassword = prompt("🔐 Ingrese su contraseña:");
+            if (inputPassword === null) return; // Si cancela, no hace nada
+
+            // Validar si el usuario y contraseña coinciden con alguna cuenta autorizada
+            const cuentaEncontrada = cuentasAdmin.find(
+                (c) => c.usuario === inputUsuario.trim() && c.pass === inputPassword
+            );
+
+            if (cuentaEncontrada) {
+                alert(`✅ Bienvenido, acceso concedido para el área de: ${cuentaEncontrada.area}`);
                 mostrarVista('admin');
-            } else if (password !== null) {
-                alert("⚠️ Contraseña incorrecta.");
+            } else {
+                alert("⚠️ Usuario o contraseña incorrectos. Acceso denegado.");
             }
         });
+    }
     }
     if (btnSalirAdmin) btnSalirAdmin.addEventListener('click', () => mostrarVista('inicio'));
 
