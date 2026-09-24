@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    }
     if (btnSalirAdmin) btnSalirAdmin.addEventListener('click', () => mostrarVista('inicio'));
 
     let gpsActual = "Cuernavaca /Centro";
