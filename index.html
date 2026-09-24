@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASC Morelos - Sistema de Atención y Seguimiento Ciudadano</title>
+    <!-- Enlace al archivo de estilos externos -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Enlace al Manifiesto PWA -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Color de la barra del navegador en móviles -->
+    <meta name="theme-color" content="#1b396a">
+</head>
+<body>
+
+    <!-- CABECERA INSTITUCIONAL -->
+    <header class="cabecera">
+        <div class="contenedor-logo">
+            <img src="escudomor.png" alt="Escudo Morelos" class="escudomor-imagen" style="width: 36px; height: 36px; object-fit: contain;">
+        </div>
+        <div class="texto-cabecera">
+            <h1 class="titulo-principal">SASC Morelos</h1>
+            <p class="subtitulo">Sistema de Atención y Seguimiento Ciudadano</p>
+        </div>
+
+        <!-- Enlace de administración con su ID original -->
+        <div style="text-align: center; margin-top: 15px;">
+            <a href="#" id="enlace-admin" style="color: #fff; text-decoration: underline; font-size: 0.85rem; font-weight: bold;">
+                🔐 Acceso a Administración
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-principal">
+        
+        <!-- PANTALLA DE INICIO -->
+        <div id="view-home" class="vista activa">
+            <section class="tarjeta">
+                <h3 class="titulo-seccion">Indicadores Municipales</h3>
+                <p class="texto-descripcion">Resumen operativo de atención en tiempo real.</p>
+                
+                <div class="grid-indicadores">
+                    <div class="caja-indicador">
+                        <p class="numero" id="stat-total">0</p>
+                        <p class="etiqueta-ind">Reportes Totales</p>
+                    </div>
+                    <div class="caja-indicador">
+                        <p class="numero">24h</p>
+                        <p class="etiqueta-ind">Tiempo Promedio</p>
+                    </div>
+                </div>
+                <button id="btn-nuevo-reporte" class="boton-principal">+ Nuevo Reporte Ciudadano</button>
+            </section>
+            
+            <section class="tarjeta">
+                <h3 class="titulo-seccion">Mis Reportes Recientes</h3>
+                <div id="lista-reportes-recientes">
+                    <p class="texto-vacio">No hay reportes registrados localmente.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- PANTALLA DE REPORTE -->
+        <div id="view-report" class="vista">
+            <section class="tarjeta">
+                <h3 class="titulo-seccion">Generar Incidencia</h3>
+                
+                <label class="etiqueta">Dirección o Área Responsable</label>
+                <select id="input-categoria" class="campo-texto">
+                    <option value="Bacheo y Pavimentación">🚧 Obras Públicas - Bacheo y Pavimentación</option>
+                    <option value="Alumbrado Público">💡 Servicios Públicos - Alumbrado</option>
+                    <option value="Fugas de Agua / Drenaje">💧 Sistema de Agua Potable</option>
+                    <option value="Recolección de Basura">🗑️ Limpieza y Aseo Urbano</option>
+                    <option value="Parques y Jardines">🌳 Ecología y Parques</option>
+                    <option value="Otro Servicio Municipal">📌 Atención Ciudadana General</option>
+                </select>
+
+                <label class="etiqueta">Título breve del problema</label>
+                <input type="text" id="input-titulo" class="campo-texto" placeholder="Ej. Luminaria fundida en esquina">
+                
+                <label class="etiqueta">Descripción detallada</label>
+                <textarea id="input-descripcion" class="campo-texto area-texto" placeholder="Detalla referencias para ubicar la incidencia..."></textarea>
+                
+                <!-- Captura de Fotografía -->
+                <label class="etiqueta">Evidencia Fotográfica</label>
+                <input type="file" id="input-foto" accept="image/*" capture="environment" class="campo-texto" style="padding: 6px;">
+                <div id="image-preview" style="margin-top: 8px;"></div>
+
+                <!-- Ubicación GPS Automática -->
+                <label class="etiqueta" style="margin-top: 10px;">Georreferenciación (GPS)</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <input type="text" id="input-ubicacion" class="campo-texto" placeholder="Coordenadas automáticas" readonly>
+                    <button type="button" id="btn-gps" class="boton-enviar" style="padding: 10px 12px; margin-top: 0; white-space: nowrap; font-size: 0.9rem;">📍 Obtener</button>
+                </div>
+                <p id="gps-status" style="font-size: 0.8rem; color: #555; margin-top: 4px;"></p>
+                
+                <button id="btn-enviar-reporte" class="boton-enviar" style="margin-top: 15px;">
+                    <span>📤</span> Registrar Folio Oficial
+                </button>
+            </section>
+        </div>
+
+        <!-- PANTALLA DE ADMINISTRACIÓN -->
+        <div id="view-admin" class="vista">
+            <section class="tarjeta">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 class="titulo-seccion" style="margin: 0;">Panel de Administración</h3>
+                    <button id="btn-salir-admin" class="boton-principal" style="background: #555; padding: 6px 12px; font-size: 0.85rem; width: auto;">⬅️ Regresar</button>
+                </div>
+                <p class="texto-descripcion">Gestión, cambio de estatus y control de incidencias ciudadanas.</p>
+                <div id="tabla-admin-reportes">
+                    <!-- Aquí se cargarán dinámicamente los reportes -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
+    <nav class="navegacion-inferior">
+        <a id="nav-inicio" class="enlace-navegacion activo" style="cursor: pointer;">
+            <div class="icono-navegacion">🏠</div>Inicio
+        </a>
+        <a id="nav-reportar" class="enlace-navegacion" style="cursor: pointer;">
+            <div class="icono-navegacion">📝</div>Reportar
+        </a>
+    </nav>
+
+    <!-- JAVASCRIPT CONECTADO Y SEGURO -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const vistaInicio = document.getElementById('view-home');
+            const vistaReporte = document.getElementById('view-report');
+            const vistaAdmin = document.getElementById('view-admin');
+            
+            const navInicio = document.getElementById('nav-inicio');
+            const navReportar = document.getElementById('nav-reportar');
+            const btnNuevoReporte = document.getElementById('btn-nuevo-reporte');
+            const btnEnviarReporte = document.getElementById('btn-enviar-reporte');
+            
+            const enlaceAdmin = document.getElementById('enlace-admin');
+            const btnSalirAdmin = document.getElementById('btn-salir-admin');
+            const contenedorAdminReportes = document.getElementById('tabla-admin-reportes');
+            
+            const btnGps = document.getElementById('btn-gps');
+            const inputUbicacion = document.getElementById('input-ubicacion');
+            const gpsStatus = document.getElementById('gps-status');
+            const inputFoto = document.getElementById('input-foto');
+            const imagePreview = document.getElementById('image-preview');
+            const listaReportesRecientes = document.getElementById('lista-reportes-recientes');
+            const statTotal = document.getElementById('stat-total');
+
+            // Función central para cambiar de pantalla
+            function mostrarVista(vista) {
+                if (vistaInicio) vistaInicio.classList.remove('activa');
+                if (vistaReporte) vistaReporte.classList.remove('activa');
+                if (vistaAdmin) vistaAdmin.classList.remove('activa');
+                if (navInicio) navInicio.classList.remove('activo');
+                if (navReportar) navReportar.classList.remove('activo');
+                
+                if (vista === 'inicio') {
+                    if (vistaInicio) vistaInicio.classList.add('activa');
+                    if (navInicio) navInicio.classList.add('activo');
+                    actualizarDashboard();
+                } else if (vista === 'reporte') {
+                    if (vistaReporte) vistaReporte.classList.add('activa');
+                    if (navReportar) navReportar.classList.add('activo');
+                } else if (vista === 'admin') {
+                    if (vistaAdmin) vistaAdmin.classList.add('activa');
+                    cargarReportesAdmin();
+                }
+                window.scrollTo(0, 0);
+            }
+
+            // Exponer función de forma global por si los elementos HTML la invocan
+            window.mostrarVista = mostrarVista;
+
+            // Eventos de navegación inferior
+            if (navInicio) navInicio.addEventListener('click', (e) => { e.preventDefault(); mostrarVista('inicio'); });
+            if (navReportar) navReportar.addEventListener('click', (e) => { e.preventDefault(); mostrarVista('reporte'); });
+            if (btnNuevoReporte) btnNuevoReporte.addEventListener('click', () => mostrarVista('reporte'));
+            if (btnSalirAdmin) btnSalirAdmin.addEventListener('click', () => mostrarVista('inicio'));
+            
+            // CONEXIÓN CLAVE: Evento para el botón de administración
+            if (enlaceAdmin) {
+                enlaceAdmin.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const password = prompt("Ingrese la contraseña de administración:");
+                    if (password === "1234") { 
+                        mostrarVista('admin');
+                    } else if (password !== null) {
+                        alert("⚠️ Contraseña incorrecta.");
+                    }
+                });
+            }
+
+            // Geolocalización GPS
+            if (btnGps) {
+                btnGps.addEventListener('click', () => {
+                    if (!navigator.geolocation) {
+                        if (gpsStatus) gpsStatus.textContent = 'Geolocalización no compatible.';
+                        return;
+                    }
+                    if (gpsStatus) gpsStatus.textContent = 'Calculando coordenadas...';
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const lat = position.coords.latitude.toFixed(5);
+                            const lon = position.coords.longitude.toFixed(5);
+                            if (inputUbicacion) inputUbicacion.value = `Lat: ${lat}, Lon: ${lon}`;
+                            if (gpsStatus) gpsStatus.textContent = '✅ Coordenadas fijadas con éxito.';
+                        },
+                        (error) => {
+                            if (gpsStatus) gpsStatus.textContent = '⚠️ Active el GPS para continuar.';
+                        },
+                        { enableHighAccuracy: true, timeout: 10000 }
+                    );
+                });
+            }
+
+            // Vista previa de foto
+            let fotoBase64 = '';
+            if (inputFoto) {
+                inputFoto.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            fotoBase64 = event.target.result;
+                            if (imagePreview) imagePreview.innerHTML = `<img src="${fotoBase64}" alt="Evidencia" style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 6px;">`;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            // Actualizar Dashboard y Estadísticas del Ciudadano
+            function actualizarDashboard() {
+                const reportes = JSON.parse(localStorage.getItem('sasc_reportes')) || [];
+                if (statTotal) statTotal.textContent = reportes.length;
+
+                if (!listaReportesRecientes) return;
+                if (reportes.length === 0) {
+                    listaReportesRecientes.innerHTML = '<p class="texto-vacio">No hay reportes registrados localmente.</p>';
+                    return;
+                }
+
+                let html = '';
+                [...reportes].reverse().forEach(rep => {
+                    html += `
+                        <div class="tarjeta-reporte" style="border: 1px solid #eee; padding: 12px; border-radius: 6px; margin-bottom: 10px; background: #fff;">
+                            ${rep.foto ? `<img src="${rep.foto}" alt="Evidencia" style="width: 100%; height: 100px; object-fit: cover; border-radius: 4px; margin-bottom: 8px;">` : ''}
+                            <p><span class="folio">Folio: ${rep.folio}</span></p>
+                            <p><strong>[${rep.categoria}]</strong> ${rep.titulo}</p>
+                            <p style="color: #555; font-size: 0.8rem; margin: 4px 0;">📍 ${rep.ubicacion}</p>
+                            <p style="margin: 0;">Estatus: <span class="estado-pendiente" style="font-weight: bold; color: #b58100;">⏳ ${rep.estatus}</span></p>
+                        </div>
+                    `;
+                });
+                listaReportesRecientes.innerHTML = html;
+            }
+
+            window.actualizarDashboard = actualizarDashboard;
+
+            // Cargar y gestionar reportes en la Vista de Administración
+            function cargarReportesAdmin() {
+                const reportes = JSON.parse(localStorage.getItem('sasc_reportes')) || [];
+
+                if (!contenedorAdminReportes) return;
+                if (reportes.length === 0) {
+                    contenedorAdminReportes.innerHTML = '<p class="texto-vacio">No hay reportes ciudadanos registrados en el sistema.</p>';
+                    return;
+                }
+
+                let html = '<div style="display: flex; flex-direction: column; gap: 15px;">';
+                
+                [...reportes].reverse().forEach((rep, indexReal) => {
+                    const index = reportes.length - 1 - indexReal;
+                    
+                    html += `
+                        <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #fafafa;">
+                            ${rep.foto ? `<img src="${rep.foto}" alt="Evidencia" style="width: 100%; max-height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 8px;">` : ''}
+                            <p style="margin: 0 0 5px 0;"><strong>Folio:</strong> <span style="color: #1b396a; font-weight: bold;">${rep.folio}</span></p>
+                            <p style="margin: 0 0 5px 0;"><strong>Categoría:</strong> ${rep.categoria}</p>
+                            <p style="margin: 0 0 5px 0;"><strong>Título:</strong> ${rep.titulo}</p>
+                            <p style="margin: 0 0 5px 0; font-size: 0.9rem; color: #555;"><strong>Descripción:</strong> ${rep.descripcion}</p>
+                            <p style="margin: 0 0 5px 0; font-size: 0.8rem; color: #666;">📍 ${rep.ubicacion}</p>
+                            <p style="margin: 0 0 10px 0; font-size: 0.8rem; color: #666;">📅 Fecha: ${rep.fecha}</p>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px;">
+                                <div>
+                                    <label style="font-size: 0.85rem; font-weight: bold;">Estatus:</label>
+                                    <select onchange="cambiarEstatusAdmin(${index}, this.value)" style="padding: 5px; border-radius: 4px; margin-left: 5px;">
+                                        <option value="Enviado / En revisión" ${rep.estatus === 'Enviado / En revisión' ? 'selected' : ''}>En revisión</option>
+                                        <option value="En Proceso / Cuadrilla Asignada" ${rep.estatus === 'En Proceso / Cuadrilla Asignada' ? 'selected' : ''}>En Proceso</option>
+                                        <option value="Resuelto" ${rep.estatus === 'Resuelto' ? 'selected' : ''}>Resuelto</option>
+                                    </select>
+                                </div>
+                                <button type="button" onclick="eliminarReporteAdmin(${index})" style="background: #d9534f; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">🗑️ Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                contenedorAdminReportes.innerHTML = html;
+            }
+
+            window.cargarReportesAdmin = cargarReportesAdmin;
+
+            window.cambiarEstatusAdmin = function(index, nuevoEstatus) {
+                let reportes = JSON.parse(localStorage.getItem('sasc_reportes')) || [];
+                if (reportes[index]) {
+                    reportes[index].estatus = nuevoEstatus;
+                    localStorage.setItem('sasc_reportes', JSON.stringify(reportes));
+                }
+            };
+
+            window.eliminarReporteAdmin = function(index) {
+                if (confirm('¿Estás segura de eliminar este reporte del sistema?')) {
+                    let reportes = JSON.parse(localStorage.getItem('sasc_reportes')) || [];
+                    reportes.splice(index, 1);
+                    localStorage.setItem('sasc_reportes', JSON.stringify(reportes));
+                    cargarReportesAdmin();
+                }
+            };
+
+            // Enviar Reporte Ciudadano
+            if (btnEnviarReporte) {
+                btnEnviarReporte.addEventListener('click', function() {
+                    const categoria = document.getElementById('input-categoria').value;
+                    const titulo = document.getElementById('input-titulo').value;
+                    const descripcion = document.getElementById('input-descripcion').value;
+                    const ubicacion = inputUbicacion ? inputUbicacion.value : '';
+                    
+                    if (!titulo.trim() || !descripcion.trim() || !ubicacion.trim() || !fotoBase64) {
+                        alert('⚠️ Complete los campos obligatorios: Título, Descripción, Fotografía y GPS.');
+                        return;
+                    }
+
+                    const folioGenerado = 'SASC-MOR-' + Math.floor(100000 + Math.random() * 900000);
+                    
+                    const nuevoReporte = {
+                        folio: folioGenerado,
+                        categoria,
+                        titulo,
+                        descripcion,
+                        ubicacion,
+                        foto: fotoBase64,
+                        estatus: 'Enviado / En revisión',
+                        fecha: new Date().toLocaleDateString()
+                    };
+
+                    let reportes = JSON.parse(localStorage.getItem('sasc_reportes')) || [];
+                    reportes.push(nuevoReporte);
+                    localStorage.setItem('sasc_reportes', JSON.stringify(reportes));
+                    
+                    alert(`✅ ¡Folio generado correctamente!\n\nNúmero de Folio: ${folioGenerado}\nLa Dirección correspondiente lo ha recibido.`);
+                    
+                    // Limpieza
+                    document.getElementById('input-titulo').value = '';
+                    document.getElementById('input-descripcion').value = '';
+                    if (inputUbicacion) inputUbicacion.value = '';
+                    if (inputFoto) inputFoto.value = '';
+                    if (imagePreview) imagePreview.innerHTML = '';
+                    if (gpsStatus) gpsStatus.textContent = '';
+                    fotoBase64 = '';
+                    
+                    mostrarVista('inicio');
+                });
+            }
+
+            // Iniciar aplicación mostrando la vista de inicio
+            mostrarVista('inicio');
+        });
+    </script>
+</body>
+</html>
